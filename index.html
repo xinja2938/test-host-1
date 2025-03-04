@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EroEroDub - Anime Streaming Platform</title>
+    <meta name="description" content="Watch your favorite anime content in Hindi dub">
+    <meta name="theme-color" content="#ff6d00">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EroEroDub">
+    <link rel="apple-touch-icon" href="img/icon-192.png">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Offline Indicator -->
+        <div id="offline-indicator" class="offline-indicator">
+            <i class="fas fa-wifi"></i>
+            <span>You are offline</span>
+        </div>
+
+        <!-- Authentication Screen -->
+        <div id="auth-screen" class="auth-container page-transition">
+            <img src="img/logo.png" alt="EroEroDub Logo" class="auth-logo">
+            <h1 class="auth-title">Welcome to EroEroDub</h1>
+            <button id="enter-btn" class="auth-button touch-feedback">Enter</button>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="page-transition" style="display: none;">
+            <!-- Header -->
+            <div class="header">
+                <img src="img/logo.png" alt="EroEroDub Logo" class="logo">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search" class="search-input" id="search-input">
+                        <i class="fas fa-search search-icon" id="search-button"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Content -->
+            <div id="home-content" class="container page-transition">
+                <!-- New Episode Releases -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">New Episode Releases</h2>
+                        <a href="#" class="see-all" data-target="all">See All</a>
+                    </div>
+                    <div class="cards-container" id="new-episodes">
+                        <!-- Cards will be added dynamically -->
+                    </div>
+                </div>
+
+                <!-- Most Favorite -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Most Favorite</h2>
+                        <a href="#" class="see-all" data-target="all">See All</a>
+                    </div>
+                    <div class="cards-container" id="most-favorite">
+                        <!-- Cards will be added dynamically -->
+                    </div>
+                </div>
+
+                <!-- Best EP -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Best EP</h2>
+                        <a href="#" class="see-all" data-target="all">See All</a>
+                    </div>
+                    <div class="cards-container" id="best-ep">
+                        <!-- Cards will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Content -->
+            <div id="all-content" class="container page-transition" style="display: none;">
+                <h2 class="section-title">All Episodes</h2>
+                <div class="all-posts-grid" id="all-posts">
+                    <!-- Cards will be added dynamically -->
+                </div>
+            </div>
+
+            <!-- My List Content -->
+            <div id="my-list-content" class="container page-transition" style="display: none;">
+                <h2 class="section-title">My List</h2>
+                <div class="all-posts-grid" id="my-list-posts">
+                    <!-- Cards will be added dynamically -->
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div id="profile-content" class="profile-container page-transition" style="display: none;">
+                <div class="profile-header">
+                    <div class="profile-avatar-container">
+                        <img src="img/avatar.png" alt="User Avatar" id="profile-avatar" class="profile-avatar">
+                        <div class="avatar-overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                    </div>
+                    <h2 class="profile-name" id="profile-name">User Name</h2>
+                    <p class="profile-email" id="profile-email">user@example.com</p>
+                    <button id="logout-btn" class="logout-button touch-feedback">Log Out</button>
+                </div>
+            </div>
+
+            <!-- Detail Page -->
+            <div id="detail-page" class="page-transition" style="display: none;">
+                <div class="detail-header">
+                    <button id="back-button" class="back-button touch-feedback">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button id="favorite-button" class="favorite-button touch-feedback">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+
+                <img id="detail-poster" src="" alt="Anime Poster" class="detail-poster">
+                <h2 id="detail-title" class="detail-title"></h2>
+
+                <div class="info-box">
+                    <div class="info-header">Series Info</div>
+                    <div class="info-content">
+                        <div class="info-row">
+                            <div class="info-label">Name</div>
+                            <div id="detail-name" class="info-value"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Language</div>
+                            <div id="detail-language" class="info-value"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Quality</div>
+                            <div id="detail-quality" class="info-value"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">Watch Now</div>
+                    <div id="episodes-container" class="episodes-container">
+                        <!-- Episode buttons will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="#" class="nav-item active touch-feedback" data-target="home">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item touch-feedback" data-target="all">
+                    <i class="fas fa-list-ul nav-icon"></i>
+                    <span>All</span>
+                </a>
+                <a href="#" class="nav-item touch-feedback" data-target="my-list">
+                    <i class="fas fa-heart nav-icon"></i>
+                    <span>My List</span>
+                </a>
+                <a href="#" class="nav-item touch-feedback" data-target="profile">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check for online/offline events to show the indicator
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
+        function updateOnlineStatus() {
+            const offlineIndicator = document.getElementById('offline-indicator');
+            if (!navigator.onLine) {
+                offlineIndicator.classList.add('visible');
+            } else {
+                offlineIndicator.classList.remove('visible');
+            }
+        }
+        
+        // Check initial status
+        document.addEventListener('DOMContentLoaded', updateOnlineStatus);
+    </script>
+    
+    <script src="js/sw-register.js"></script>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
